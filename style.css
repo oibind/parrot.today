@@ -1,8 +1,14 @@
 body {
-  background:#b8a2ce;
+  background: #b8a2ce;
   font-family: Courier;
 }
 
-h1 {
-  color: white;
+.center {
+  position: absolute; 
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  margin-top: -250px;
+  margin-left: -250px;
 }

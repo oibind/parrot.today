@@ -1,18 +1,13 @@
 import boto3
 import random
-from smart_open import smart_open
 import urllib.request
 
 
 def main():
-    # download random parrot
-    parrots = smart_open('s3://parrot.today/parrots.txt', encoding='utf8')
-    url = (random.choice(list(parrots)))
-    urllib.request.urlretrieve(url, "/tmp/parrot.jpg")
-
-    # upload random parrot to s3
-    s3 = boto3.client("s3")
+    s3 = boto3.resource("s3")
     bucket = "parrot.today"
-    client = boto3.resource("s3")
-    client.meta.client.upload_file("/tmp/parrot.jpg", bucket, "parrot.jpg",
-                                   ExtraArgs={'ACL': 'public-read'})
+    s3.Bucket(bucket).download_file("parrots.txt", "/tmp/parrots.txt")
+    url = (random.choice(list(open('/tmp/parrots.txt'))))
+    urllib.request.urlretrieve(url, "/tmp/parrot.jpg")
+    s3.Bucket(bucket).upload_file("/tmp/parrot.jpg",
+                                  "parrot.jpg", ExtraArgs={"ACL": "public-read"})

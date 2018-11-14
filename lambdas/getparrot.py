@@ -3,7 +3,7 @@ import random
 import urllib.request
 
 
-def main():
+def lambda_handler(event, context):
     s3 = boto3.resource("s3")
     bucket = "parrot.today"
     s3.Bucket(bucket).download_file("parrots.txt", "/tmp/parrots.txt")

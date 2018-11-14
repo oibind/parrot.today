@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import boto3
 import random
 from smart_open import smart_open
@@ -18,6 +16,3 @@ def main():
     client = boto3.resource("s3")
     client.meta.client.upload_file("/tmp/parrot.jpg", bucket, "parrot.jpg",
                                    ExtraArgs={'ACL': 'public-read'})
-
-
-main()

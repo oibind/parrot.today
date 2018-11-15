@@ -10,4 +10,4 @@ def lambda_handler(event, context):
     url = (random.choice(list(open('/tmp/parrots.txt'))))
     urllib.request.urlretrieve(url, "/tmp/parrot.jpg")
     s3.Bucket(bucket).upload_file("/tmp/parrot.jpg",
-                                  "parrot.jpg", ExtraArgs={"ACL": "public-read"})
+                                  "parrot.jpg", ExtraArgs={"ContentType": "image/jpeg", "ACL": "public-read"})

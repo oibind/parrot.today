@@ -4,10 +4,14 @@ import urllib.request
 
 
 def lambda_handler(event, context):
+    
+    BUCKET_NAME = "parrot.today"
+    URL_LIST = "parrots.txt"
+    IMG = "parrot.jpg"
+
     s3 = boto3.resource("s3")
-    bucket = "parrot.today"
-    s3.Bucket(bucket).download_file("parrots.txt", "/tmp/parrots.txt")
-    url = (random.choice(list(open('/tmp/parrots.txt'))))
-    urllib.request.urlretrieve(url, "/tmp/parrot.jpg")
-    s3.Bucket(bucket).upload_file("/tmp/parrot.jpg",
-                                  "parrot.jpg", ExtraArgs={"ContentType": "image/jpeg", "ACL": "public-read"})
+    s3.Bucket(BUCKET_NAME).download_file(URL_LIST, "/tmp/"+URL_LIST)
+    url = (random.choice(list(open("/tmp/"+URL_LIST))))
+    urllib.request.urlretrieve(url, "/tmp/"+IMG)
+    s3.Bucket(BUCKET_NAME).upload_file("/tmp/"+IMG,
+                                  IMG, ExtraArgs={"ContentType": "image/jpeg", "ACL": "public-read"})

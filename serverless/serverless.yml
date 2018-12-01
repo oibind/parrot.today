@@ -18,3 +18,5 @@ provider:
 functions:
   getparrot:
     handler: getparrot.getparrot
+    events:    
+      - schedule: rate(1 day)

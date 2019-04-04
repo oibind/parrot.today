@@ -3,7 +3,7 @@ service: getparrot
 provider:
   name: aws
   runtime: python3.7
-  
+
   region: us-east-1
 
   timeout: 20
@@ -18,5 +18,5 @@ provider:
 functions:
   getparrot:
     handler: getparrot.getparrot
-    events:    
+    events:
       - schedule: rate(1 day)
